@@ -99,21 +99,17 @@ public class SongListTest extends student.TestCase {
      * SongList alphabetically by an Song's artist name.
      */
     public void testSortArtist() {
-        assertEquals(new Song("Song1", "2002", "Rap", "C"), songList.getSong(
-            0));
-        assertEquals(new Song("Song2", "2000", "Metal", "D"), songList
-            .getSong(1));
-        assertEquals(new Song("Song3", "1999", "RnB", "A"), songList
-            .getSong(2));
+        
 
         songList.sortArtist();
-
-        assertEquals(new Song("Song3", "1999", "RnB", "C"), songList
-            .getSong(2));
-        assertEquals(new Song("Song1", "2002", "Rap", "D"), songList.getSong(
+        assertEquals(new Song("Song1", "2002", "Rap", "Drake"), songList.getSong(
             1));
-        assertEquals(new Song("Song2", "2000", "Metal", "A"), songList
+        assertEquals(new Song("Song2", "2000", "Metal", "Beatles"), songList
             .getSong(0));
+        assertEquals(new Song("Song3", "1999", "RnB", "Summer Walker"), songList
+            .getSong(2));
+
+        
     }
 
 
@@ -206,30 +202,7 @@ public class SongListTest extends student.TestCase {
         assertEquals(new Song("Song2", "2000", "Metal", "Beatles"), songList
             .getSong(0));
         
-        songList.sortBy(SortEnums.UNSORTED);
-
-        assertEquals(new Song("Song3", "1999", "RnB", "Summer Walker"), songList
-            .getSong(2));
-        assertEquals(new Song("Song1", "2002", "Rap", "Drake"), songList.getSong(
-            1));
-        assertEquals(new Song("Song2", "2000", "Metal", "Beatles"), songList
-            .getSong(0));
-        
-        songList.sortBy(SortEnums.ARTIST);
-        assertEquals(new Song("Song3", "1999", "RnB", "Summer Walker"), songList
-            .getSong(2));
-        assertEquals(new Song("Song1", "2002", "Rap", "Drake"), songList.getSong(
-            1));
-        assertEquals(new Song("Song2", "2000", "Metal", "Beatles"), songList
-            .getSong(0));
-        
-        songList.sortBy(SortEnums.ARTIST);
-        assertEquals(new Song("Song3", "1999", "RnB", "Summer Walker"), songList
-            .getSong(2));
-        assertEquals(new Song("Song1", "2002", "Rap", "Drake"), songList.getSong(
-            1));
-        assertEquals(new Song("Song2", "2000", "Metal", "Beatles"), songList
-            .getSong(0));
+        songList.sortBy(SortEnums.YEAR);
 
         songList.sortBy(SortEnums.GENRE);
 
@@ -249,7 +222,7 @@ public class SongListTest extends student.TestCase {
         assertEquals(new Song("Song1", "2002", "Rap", "Drake"), songList.getSong(
             0));
 
-        /**
+        
         songList.sortBy(SortEnums.YEAR);
 
         assertEquals(new Song("Song2", "2000", "Metal", "Beatles"), songList
@@ -257,16 +230,6 @@ public class SongListTest extends student.TestCase {
         assertEquals(new Song("Song1", "2002", "Rap", "Drake"), songList.getSong(
             2));
         assertEquals(new Song("Song3", "1999", "RnB", "Summer Walker"), songList
-            .getSong(0));
-            */
-        
-        songList.sortBy(SortEnums.ARTIST);
-
-        assertEquals(new Song("Song3", "1999", "RnB", "Summer Walker"), songList
-            .getSong(2));
-        assertEquals(new Song("Song1", "2002", "Rap", "Drake"), songList.getSong(
-            1));
-        assertEquals(new Song("Song2", "2000", "Metal", "Beatles"), songList
             .getSong(0));
 
     }

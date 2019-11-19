@@ -93,36 +93,33 @@ public class SongList extends SinglyLinkedList<Song> {
     public void insertInOrder(SortEnums sortType, Node<Song> nodeToInsert) {
         Song insertSong = nodeToInsert.getData();
         Node<Song> currentNode = this.getFirst();
-        Song currentSong = currentNode.getData();
+        
         Node<Song> previousNode = null;
         if (sortType == SortEnums.GENRE) {
             CompareByGenre comparer = new CompareByGenre();
             while ((currentNode != null) && (comparer.compare(insertSong,
-                currentSong) > 0)) {
+                currentNode.getData()) > 0)) {
                 previousNode = currentNode;
                 currentNode = currentNode.next();
             }
         }
         else if (sortType == SortEnums.TITLE) {
             CompareByTitle comparer = new CompareByTitle();
-            while ((currentNode != null) && (comparer.compare(insertSong,
-                currentSong) > 0)) {
-                previousNode = currentNode;
-                currentNode = currentNode.next();
-            }
-        }
-        else if (sortType == SortEnums.ARTIST) {
-            CompareByArtist comparer = new CompareByArtist();
-            while ((currentNode != null) && (comparer.compare(insertSong,
-                currentSong) > 0)) {
+            while ((currentNode != null) && (comparer.compare(insertSong, currentNode.getData()) > 0)) {
                 previousNode = currentNode;
                 currentNode = currentNode.next();
             }
         }
         else if (sortType == SortEnums.YEAR) {
             CompareByYear comparer = new CompareByYear();
-            while ((currentNode != null) && (comparer.compare(insertSong,
-                currentSong) > 0)) {
+            while ((currentNode != null) && (comparer.compare(insertSong, currentNode.getData()) > 0)) {
+                previousNode = currentNode;
+                currentNode = currentNode.next();
+            }
+        }
+        else if (sortType == SortEnums.ARTIST || sortType == SortEnums.UNSORTED) {
+            CompareByArtist comparer = new CompareByArtist();
+            while ((currentNode != null) && (comparer.compare(insertSong, currentNode.getData()) > 0)) {
                 previousNode = currentNode;
                 currentNode = currentNode.next();
             }
@@ -145,8 +142,8 @@ public class SongList extends SinglyLinkedList<Song> {
      */
     public void sortBy(SortEnums sortType) {
         if ((this.size() > 1)) {
-            Node<Song> firstNode = this.getNodeAt(0);
-            Node<Song> unsortedPart = this.getNodeAt(0).next();
+            Node<Song> firstNode = this.getFirst();
+            Node<Song> unsortedPart = this.getFirst().next();
             firstNode.setNext(null);
 
             while (unsortedPart != null) {
