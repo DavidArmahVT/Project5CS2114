@@ -13,6 +13,8 @@ public class Song {
     private String year;
     private String genre;
     private String artist;
+    private int songID;
+    
     
     /**
      * creates a new song object
@@ -21,12 +23,18 @@ public class Song {
      * @param genre is the song genre
      * @param artist is the artist of the song
      */
-    public Song(String title, String year, String genre, String artist)
+    public Song(String title, String year, String genre, String artist, int songID)
     {
         this.title = title;
         this.year = year;
         this.genre = genre;
         this.artist = artist;
+        this.songID = songID;
+    }
+    public int getSongID()
+    {
+        return songID;
+        
     }
     
     /**

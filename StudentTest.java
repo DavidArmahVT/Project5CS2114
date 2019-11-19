@@ -19,14 +19,14 @@ import java.util.LinkedList;
  */
 public class StudentTest extends student.TestCase {
     private Student student;
-    private LinkedList<String[]> studentList;
+    private SinglyLinkedList<String[]> studentList;
 
 
     /**
      * sets up fields, creates the student object used in testing
      */
     public void setUp() {
-        student = new Student(15, "10/12/17", MajorEnums.CS,
+        student = new Student("15", "10/12/17", MajorEnums.CS,
             RegionEnums.OUTSIDE, HobbyEnums.SPORTS, studentList);
     }
 
@@ -36,7 +36,7 @@ public class StudentTest extends student.TestCase {
      */
     public void testStudent() {
         assertEquals("10/12/17", student.getDate());
-        assertEquals(15, student.getStudentID());
+        assertEquals("15", student.getStudentID());
         assertEquals(MajorEnums.CS, student.getMajor());
         assertEquals(RegionEnums.OUTSIDE, student.getRegion());
         assertEquals(HobbyEnums.SPORTS, student.getHobby());
@@ -49,7 +49,7 @@ public class StudentTest extends student.TestCase {
      * 
      */
     public void testEquals() {
-        Student student2 = new Student(15, "10/12/17", MajorEnums.CS,
+        Student student2 = new Student("15", "10/12/17", MajorEnums.CS,
             RegionEnums.OUTSIDE, HobbyEnums.SPORTS, studentList);
         assertTrue(student.equals(student2));
     }
@@ -77,7 +77,7 @@ public class StudentTest extends student.TestCase {
      * 
      */
     public void testEquals3() {
-        Student student2 = new Student(16, "10/12/18", MajorEnums.CS,
+        Student student2 = new Student("16", "10/12/18", MajorEnums.CS,
             RegionEnums.NE, HobbyEnums.SPORTS, studentList);
         assertFalse(student.equals(student2));
 

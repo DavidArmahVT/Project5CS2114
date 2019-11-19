@@ -1,4 +1,8 @@
 package prj5;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * This is a basic implementation of a linked list
  *
@@ -19,7 +23,7 @@ package prj5;
  *            This is the type of object that this class will store
  */
 
-public class SinglyLinkedList<E> implements LList<E> {
+public class SinglyLinkedList<E> implements Iterable<E> {
 
     /**
      * This represents a node in a singly linked list. This node stores data
@@ -135,7 +139,6 @@ public class SinglyLinkedList<E> implements LList<E> {
      *
      * @return the number of elements
      */
-    @Override
     public int size() {
         return size;
     }
@@ -154,7 +157,6 @@ public class SinglyLinkedList<E> implements LList<E> {
      * @throws IllegalArgumentException
      *             if obj is null
      */
-    @Override
     public void add(int index, E obj) {
         // check if the object is null
         if (obj == null) {
@@ -208,7 +210,6 @@ public class SinglyLinkedList<E> implements LList<E> {
      * @throws IllegalArgumentException
      *             if obj is null
      */
-    @Override
     public void add(E obj) {
         // check if the object is null
         if (obj == null) {
@@ -238,7 +239,6 @@ public class SinglyLinkedList<E> implements LList<E> {
      *
      * @return true if the array is empty
      */
-    @Override
     public boolean isEmpty() {
         return (size == 0);
     }
@@ -251,7 +251,6 @@ public class SinglyLinkedList<E> implements LList<E> {
      *            the object to remove
      * @return true if successful
      */
-    @Override
     public boolean remove(E obj) {
         Node<E> current = head;
 
@@ -287,7 +286,6 @@ public class SinglyLinkedList<E> implements LList<E> {
      * @throws IndexOutOfBoundsException
      *             if there is not an element at the index
      */
-    @Override
     public boolean remove(int index) {
         // if the index is invalid
         if (index < 0 || head == null) {
@@ -330,7 +328,6 @@ public class SinglyLinkedList<E> implements LList<E> {
      * @throws IndexOutOfBoundsException
      *             if no node at the given index
      */
-    @Override
     public E get(int index) {
         Node<E> current = head;
         int currentIndex = 0;
@@ -381,7 +378,6 @@ public class SinglyLinkedList<E> implements LList<E> {
      *            the object to check for
      * @return true if it contains the object
      */
-    @Override
     public boolean contains(E obj) {
         Node<E> current = head;
         while (current != null) {
@@ -398,7 +394,6 @@ public class SinglyLinkedList<E> implements LList<E> {
     /**
      * Removes all of the elements from the list
      */
-    @Override
     public void clear() {
         // make sure we don't call clear on an empty list
         while (head != null) {
@@ -416,7 +411,6 @@ public class SinglyLinkedList<E> implements LList<E> {
      *            the object to look for
      * @return the last position of it. -1 If it is not in the list
      */
-    @Override
     public int lastIndexOf(E obj) {
         int lastIndex = -1;
         Node<E> current = head;
@@ -439,7 +433,6 @@ public class SinglyLinkedList<E> implements LList<E> {
      *
      * @return a string representing the list
      */
-    @Override
     public String toString() {
         String result = "{";
 
@@ -477,41 +470,111 @@ public class SinglyLinkedList<E> implements LList<E> {
 
         return array;
     }
-
-
     /**
-     * Returns true if both lists have the exact same contents
-     * in the exact same order
+     * Iterator method that creates an Iterator object for this LinkedList.
      *
-     * @return a boolean of whether two lists have the same contents,
-     *         item per item and in the same order
+     * @return A new Iterator object for this LinkedList.
      */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
+    public Iterator<E> iterator() {
+        return new LinkedListIterator<E>();
+    }
+    /**
+     * An Iterator class for the LinkedList that traverses the list from the
+     * front to the back.
+     * 
+     * @author Anthony Farina (farinaa)
+     * @version 2018.04.22
+     * @param <E>
+     *            The generic data type to use for this class.
+     */
+    private class LinkedListIterator<T> implements Iterator<E> {
+
+        /**
+         * Private variables needed to keep track of the next Node, the next
+         * position, and if the next method was called.
+         */
+        private Node<E> nextNode;
+        private int nextPos;
+        private boolean nextCalled;
+
+
+        /**
+         * Creates a new LinkedListIterator object by initializing the next
+         * Node, the next position integer, and the boolean to check if the next
+         * method has been called.
+         */
+        public LinkedListIterator() {
+            nextNode = head;
+            nextPos = 0;
+            nextCalled = false;
         }
-        if (obj == null) {
-            return false;
+
+
+        /**
+         * Checks if there is a Node next in the LinkedList.
+         *
+         * @return True if there is Node next in the LinkedList, false
+         *         otherwise.
+         */
+        @Override
+        public boolean hasNext() {
+            return nextNode != null;
         }
-        if (this.getClass() == obj.getClass()) {
-            @SuppressWarnings("unchecked")
-            SinglyLinkedList<E> other = ((SinglyLinkedList<E>)obj);
-            if (other.size() == this.size()) {
-                Node<E> current = head;
-                Node<E> otherCurrent = other.head;
-                while (current != null) {
-                    if (!current.getData().equals(otherCurrent.getData())) {
-                        return false;
-                    }
-                    current = current.next();
-                    otherCurrent = otherCurrent.next();
-                }
-                return true;
+
+
+        /**
+         * Gets the next value in the LinkedList.
+         *
+         * @return The next value.
+         * @throws NoSuchElementException
+         *             Thrown when there isn't a Node next in the LinkedList
+         *             (which means the end of the list has been reached).
+         */
+        @Override
+        public E next() throws NoSuchElementException {
+            if (hasNext()) {
+                nextCalled = true;
+                nextPos++;
+
+                Node<E> returnNode = nextNode;
+                nextNode = nextNode.next();
+                return returnNode.getData();
+            }
+            else {
+                throw new NoSuchElementException("Illegal call to next(): "
+                    + "end of list reached.");
             }
         }
 
-        return false;
+
+        /**
+         * Removes the last object returned from next() from the LinkedList.
+         *
+         * @throws IllegalStateException
+         *             Thrown if next() has not been called yet and if the
+         *             object has already been removed.
+         */
+        @Override
+        public void remove() throws IllegalStateException {
+            if (nextCalled) {
+
+                if (nextPos >= 2) {
+                    Node<E> prevNode = getNodeAt(nextPos - 2);
+                    prevNode.setNext(nextNode);
+                }
+                else {
+                    head = head.next();
+                }
+
+                nextPos--;
+                size--;
+                nextCalled = false;
+            }
+            else {
+                throw new IllegalStateException("Illegal call to remove(): "
+                    + "next() has not been called yet.");
+            }
+        }
     }
     
 

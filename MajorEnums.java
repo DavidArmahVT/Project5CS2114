@@ -6,6 +6,6 @@ package prj5;
  *
  */
 public enum MajorEnums {
-    CS, MATH, CMDA, ENG;
+    CS, MATHORCMDA, ENG, OTHER;
 
 }

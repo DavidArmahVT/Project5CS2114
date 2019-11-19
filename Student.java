@@ -7,8 +7,6 @@
 // -- Chase Conover (chase00)
 package prj5;
 
-import java.util.LinkedList;
-
 /**
  * Class represents one individual student.
  * 
@@ -17,12 +15,12 @@ import java.util.LinkedList;
  *
  */
 public class Student {
-    private int studentID;
+    private String studentID;
     private String date;
     private MajorEnums major;
     private RegionEnums region;
     private HobbyEnums hobby;
-    private LinkedList<String[]> students;
+    private SinglyLinkedList<String[]> students;
 
 
     /**
@@ -30,12 +28,12 @@ public class Student {
      * Constructor for a single student
      */
     public Student(
-        int studentID,
+        String studentID,
         String date,
         MajorEnums major,
         RegionEnums region,
         HobbyEnums hobby,
-        LinkedList<String[]> students) {
+        SinglyLinkedList<String[]> students) {
         this.studentID = studentID;
         this.date = date;
         this.major = major;
@@ -49,7 +47,7 @@ public class Student {
      * 
      * @return
      */
-    public int getStudentID() {
+    public String getStudentID() {
         return studentID;
     }
 
@@ -124,7 +122,7 @@ public class Student {
      * 
      * @return responses
      */
-    public LinkedList<String[]> getResponses() {
+    public SinglyLinkedList<String[]> getResponses() {
         return students;
     }
 
