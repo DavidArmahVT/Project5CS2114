@@ -1,3 +1,4 @@
+package prj5;
 /**
  * This is a basic implementation of a linked list
  *
@@ -89,6 +90,13 @@ public class SinglyLinkedList<E> implements LList<E> {
         public E getData() {
             return data;
         }
+        /**
+         * Sets the data in the node
+         * @param data is the data found in the node
+         */
+        public void setData(E data) {
+            this.data = data;
+        }
     }
 
     private Node<E> head;
@@ -104,6 +112,21 @@ public class SinglyLinkedList<E> implements LList<E> {
         head = null;
         size = 0;
 
+    }
+    
+    /**
+     * returns the first node in the list
+     */
+    public Node<E> getFirst()
+    {
+        return head;
+    }
+    /**
+     * 
+     */
+    public void setFirst(Node<E> first)
+    {
+        head = first;
     }
 
 
@@ -327,6 +350,28 @@ public class SinglyLinkedList<E> implements LList<E> {
         }
         return data;
     }
+    /**
+     * Gets the Node at the specified index.
+     * 
+     * @param index
+     *            The index of the Node to return.
+     * @return The Node at the specified index.
+     * @throws IndexOutOfBoundsException
+     *             Thrown when the index does not exist for this LinkedList.
+     */
+    public Node<E> getNodeAt(int index) {
+        if (index < 0 || size <= index) {
+            throw new IndexOutOfBoundsException("No element exists at"
+                + " the given index.");
+        }
+
+        Node<E> curr = head;
+        for (int i = 0; i < index; i++) {
+            curr = curr.next();
+        }
+
+        return curr;
+    }
 
 
     /**
@@ -468,5 +513,6 @@ public class SinglyLinkedList<E> implements LList<E> {
 
         return false;
     }
+    
 
 }
