@@ -44,4 +44,43 @@ public class StudentTest extends student.TestCase {
 
     }
 
+
+    /**
+     * 
+     */
+    public void testEquals() {
+        Student student2 = new Student(15, "10/12/17", MajorEnums.CS,
+            RegionEnums.OUTSIDE, HobbyEnums.SPORTS, studentList);
+        assertTrue(student.equals(student2));
+    }
+
+
+    /**
+     * 
+     */
+    public void testEquals1() {
+        assertFalse(student.equals(null));
+    }
+
+
+    /**
+     * 
+     */
+    public void testEquals2() {
+        String str = "str";
+        assertFalse(student.equals(str));
+
+    }
+
+
+    /**
+     * 
+     */
+    public void testEquals3() {
+        Student student2 = new Student(16, "10/12/18", MajorEnums.CS,
+            RegionEnums.NE, HobbyEnums.SPORTS, studentList);
+        assertFalse(student.equals(student2));
+
+    }
+
 }
