@@ -9,7 +9,7 @@ import CS2114.Window;
  * Creates and organizes the Shapes in the Legend. Default values stored in
  * DisplayWindow.
  * 
- * @author Josh Hayward
+ * @author Chase Conover
  * @version 2018.04.10
  */
 public class LegendShape {
